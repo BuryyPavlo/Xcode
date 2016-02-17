@@ -75,7 +75,7 @@ class ViewController: UIViewController {
                     }
             }
             show(x);
-            interestBool = false;
+            interestBool = false
         }
     }
     
