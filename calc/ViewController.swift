@@ -97,6 +97,10 @@ class ViewController: UIViewController {
                         answer = y / x
                     case 1004 where  x == 0:
                         answer = 0
+                    case 1010:
+                        answer = 1/x
+                    case 1100:
+                        answer =  pow(y, x);
                     default:  show(x);
                 }   }
         if sender.tag != 1000 {
@@ -152,13 +156,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var result: UILabel!
     
-    @IBAction func sign (sender: AnyObject){
-        if countnubers == 0 && operationActive == 1000 {x = y}
-        x = -x
-        show(x);
-        signPlus = !signPlus
-    }
-    
     @IBAction func interest (sender : AnyObject){
         if y != 0 {
             answer = y/100*x;
@@ -173,5 +170,11 @@ class ViewController: UIViewController {
         signPlus = true;
         interestBool = true
     }
+    
+    @IBAction func sign(sender: AnyObject){
+        if countnubers == 0 && operationActive == 1000 {x = y}
+        x = -x
+        show(x);
+        signPlus = !signPlus
+    }
 }
-
