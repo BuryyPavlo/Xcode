@@ -47,18 +47,18 @@ class ViewController: UIViewController {
         }
         if (operationActive != 0 && countnubers == 0)
         {x = 0;}
-        countnubers++
+        countnubers+=1
         if countnubers<=10
         {
             if signPlus {
                 if decimalbool
                 {
                     if ( sender.tag == 0){
-                        power++
+                        power+=1
                     }
                     else {
                         x = x + Double(sender.tag)/pow(10,Double(power));
-                        power++;
+                        power+=1
                     }
                 }
                 else
@@ -69,11 +69,11 @@ class ViewController: UIViewController {
             else {
                     if decimalbool {
                         if ( sender.tag == 0){
-                            power++
+                            power += 1
                         }
                         else {
                             x = x - Double(sender.tag)/pow(10,Double(power));
-                            power++;
+                            power += 1
                         }
                     }
                     else{
@@ -90,6 +90,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operations(sender : UIButton){
+        if equalBoll == true && sender.tag != 1000 {
+            operationActive = -1
+            x = y
+        }
         if countnubers != 0 || interestBool == true  {
             switch operationActive
                 {
@@ -115,6 +119,7 @@ class ViewController: UIViewController {
                         x =  pow(y, x);
                     default:  show(x);
                 }   }
+        show(x)
         if sender.tag != 1000 {
             operationActive  = sender.tag;
             countnubers = 0;
@@ -127,7 +132,6 @@ class ViewController: UIViewController {
             x = x1 ?? 0
             equalBoll = true
         }
-        show(y)
         power = 1
         decimalbool = false
         signPlus = true;
@@ -151,7 +155,7 @@ class ViewController: UIViewController {
     }
     
     func show (number: Double)-> Void {
-     var test = number/Double(Int64(number))
+     let test = number/Double(Int64(number))
         if ( test == 1) {
             decimalbool = false}
         else{

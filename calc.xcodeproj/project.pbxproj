@@ -156,6 +156,8 @@
 		4B160CE21C6F595A00651CD0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0730;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Buryi;
 				TargetAttributes = {
