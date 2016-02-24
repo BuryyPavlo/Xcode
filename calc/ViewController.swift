@@ -10,7 +10,7 @@ import UIKit
 
 var x : Double = 0.0
 var y : Double = 0.0
-var answer : Double = 0.0
+var x1 : Double?
 var countnubers:Int = 0
 // case operations
 var operationActive = 0
@@ -19,8 +19,10 @@ var decimalbool:Bool = false
 var power = 1
 // +/-
 var signPlus: Bool = true
-
+// %
 var interestBool:Bool = false
+// =
+var equalBoll: Bool = false
 
 
 class ViewController: UIViewController {
@@ -38,6 +40,10 @@ class ViewController: UIViewController {
     @IBAction func digitals (sender: UIButton){
         if countnubers == -1 {
             countnubers = 0
+        }
+        if equalBoll {
+            x = 0
+            clearAllclear(x)
         }
         if (operationActive != 0 && countnubers == 0)
         {x = 0;}
@@ -88,46 +94,51 @@ class ViewController: UIViewController {
             switch operationActive
                 {
                     case 1001:
-                        answer = y + x
+                        x1 = x;
+                        x = y + x
                     case 1002:
-                        answer = y - x
+                        x1 = x
+                        x = y - x
                     case 1003:
-                        answer = y * x
+                        x1 = x
+                        x = y * x
                     case 1004 where  x != 0:
-                        answer = y / x
+                        x1 = x
+                        x = y / x
                     case 1004 where  x == 0:
-                        answer = 0
+                        x = 0
                     case 1010:
-                        answer = 1/x
+                        x1 = x
+                        x = 1/x
                     case 1100:
-                        answer =  pow(y, x);
+                        x1 = x;
+                        x =  pow(y, x);
                     default:  show(x);
                 }   }
         if sender.tag != 1000 {
             operationActive  = sender.tag;
             countnubers = 0;
-            if answer != 0 {
-                y = answer
-            } else {
-                y = x
-            }
-        } else
-        {
-            countnubers = -1;
-            y = answer
-            show( answer)
+            y = x
+            equalBoll = false
         }
-        //show(answer);
+        else{
+            countnubers = -1;
+            y = x
+            x = x1 ?? 0
+            equalBoll = true
+        }
+        show(y)
         power = 1
         decimalbool = false
         signPlus = true;
         interestBool = false
-        answer = 0
     }
     
     @IBAction func clearAllclear(sender:AnyObject){
         if x == 0 {
             y = 0.0
+            x1 = nil
+            equalBoll = false
         }
             countnubers = 0
             power = 1
@@ -136,8 +147,7 @@ class ViewController: UIViewController {
             signPlus = true
             interestBool = false;
             x = 0.0
-            answer = 0.0
-        
+            operationActive = 0
     }
     
     func show (number: Double)-> Void {
@@ -158,12 +168,12 @@ class ViewController: UIViewController {
     
     @IBAction func interest (sender : AnyObject){
         if y != 0 {
-            answer = y/100*x;
+             x = y/100*x;
         } else {
-            answer=x/100;
-            operationActive = 1;
+             x = x/100
+            operationActive = 1
+            show(x)
         }
-        show(answer);
         countnubers = 0;
         power = 1;
         decimalbool = false;
